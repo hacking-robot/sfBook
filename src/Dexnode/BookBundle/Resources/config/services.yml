@@ -1,0 +1,7 @@
+parameters:
+#    dexnode_book.example.class: Dexnode\BookBundle\Example
+
+services:
+#    dexnode_book.example:
+#        class: %dexnode_book.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

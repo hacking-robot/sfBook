@@ -1,0 +1,4 @@
+dexnode_book:
+    resource: "@DexnodeBookBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,3 @@
+dexnode_book_homepage:
+    pattern:  /
+    defaults: { _controller: DexnodeBookBundle:Default:index }
