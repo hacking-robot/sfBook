@@ -1,0 +1,9 @@
+%div(class="container")
+  %div(class="navbar")
+    %div(class="navbar-header")
+      %a(href="/" class="navbar-brand") Livre d'or
+    %div(class="navbar-collapse collapse" id="navbar-main")
+      %ul(class="navbar-nav nav")
+        - for category in categories
+          %li(class="dropdown")
+            %a(href="/") #{category.getNameFr()}

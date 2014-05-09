@@ -1,16 +1,3 @@
-!!!
-%html
-  %head
-    %title Livre d'or
-    %link(rel='stylesheet' href='/css/bootstrap.css')
-  %body
-    %div(class="container")
-      %div(class="navbar")
-        %div(class="navbar-header")
-          %a(href="/" class="navbar-brand") Livre d'or
-        %div(class="navbar-collapse collapse" id="navbar-main")
-          %ul(class="navbar-nav nav")
-            %li(class="dropdown")
-              %a(href="/") Accueil
-            %li(class="dropdown")
-              %a(href="/books") Tous les messages
+- extends "DexnodeBookBundle::layout.html.haml"
+- block content
+  view default index
