@@ -1,0 +1,12 @@
+# Dexnode/BookBundle/Resources/config/admin.yml
+services:
+    sonata.admin.category:
+        class: Dexnode\BookBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Category", label_translator_strategy: "sonata.admin.label.strategy.native" }
+        arguments:
+            - ~
+            - Dexnode\BookBundle\Entity\Category
+            - ~
+        calls:
+            - [ setTranslationDomain, [DexnodeBookBundle]]

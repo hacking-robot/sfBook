@@ -1,10 +1,28 @@
 - extends "DexnodeBookBundle::layout.html.haml"
 - block content
   %div(class="row-fluid")
-    %div(class="row")
-      %div(class="col-xs-3 col-md-2")
-        %a(href="#" class="thumbnail")
-          %img(data-src="/books/en/alice_in_wonderland---1396881301.jpg" src="/books/en/alice_in_wonderland---1396881301.jpg")
-
-
-
+    - for book in books
+      %div(class="row")        
+        %div(class="panel panel-default")
+          %div(class="panel-heading")
+            #{book.getTitle()} | #{book.getAuthor()} | #{book.getReleaseDate()|date('Y-m-d')} | #{book.getPagesCount()} pages
+          %div(class="panel-body")
+            %div(class="col-xs-3 col-md-2")
+              %a(href="#" class="thumbnail")
+                %img(data-src="#{book.getImageFilename()}" src="#{book.getImageFilename()}")              
+            #{book.getDescription()}
+            %button(type="button" class="btn btn-primary btn-xs")
+              Détails...
+            %div(style="float:bottom;margin-top:10px;")              
+              %span(class="label label-info" style="font-size:12px;margin-right: 5px;")
+                score: #{book.getScore()}
+              %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
+                #{book.getPagesCount()} pages
+              %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
+                #{book.getLanguage()}
+              %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
+                #{book.getReleaseDate()|date('Y-m-d')}                  
+              %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
+                #{book.getAuthor()}
+              %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
+                ISBN #{book.getISBN13()}

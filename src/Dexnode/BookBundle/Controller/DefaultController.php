@@ -8,7 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('DexnodeBookBundle:Default:index.html.haml', array());
+        $m = $this->getDoctrine()->getManager();
+        $books = $m->getRepository('DexnodeBookBundle:Book')->findByIsActive(TRUE);
+
+        return $this->render('DexnodeBookBundle:Default:index.html.haml', array('books'=>$books));
     }
 
     public function menuAction()
