@@ -92,7 +92,7 @@ class LoadBookData extends AbstractFixture implements OrderedFixtureInterface
 					if(in_array($_colName, array("releaseDate","updatedAt","createdAt")))
 						$_data = new \DateTime($_data);	
 
-					call_user_method('set'.ucfirst($_colName), $bookObj, $_data);
+					$bookObj->{'set'.ucfirst($_colName)}( $_data);
 					$cat_reference[$_ref] = $bookObj;					
 				}
 				else

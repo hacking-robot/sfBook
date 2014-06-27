@@ -3,6 +3,7 @@
 namespace Dexnode\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo; // gedmo annotations
 
 /**
  * Book
@@ -32,6 +33,14 @@ class Book
      * @ORM\Column(name="title", type="string", length=128)
      */
     private $title;
+
+    /**
+     * @var string
+     * @Gedmo\Translatable
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=24)
+     */
+    private $slug;    
 
     /**
      * @var string

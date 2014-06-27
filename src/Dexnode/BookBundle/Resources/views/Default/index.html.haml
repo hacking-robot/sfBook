@@ -21,11 +21,11 @@
               %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
                 #{book.getLanguage()}
               %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
-                #{book.getReleaseDate()|date('Y-m-d')}                  
+                #{book.getReleaseDate()|date('Y-m-d')}
               %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
                 #{book.getAuthor()}
               %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
                 ISBN #{book.getISBN13()}
               - for categorie in book.getCategories()
                 %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
-                  #{categorie.nameFr()}                
+                  #{categorie.getName()}

@@ -3,6 +3,8 @@
 namespace Dexnode\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo; // gedmo annotations
+use Gedmo\Translatable\Translatable;
 
 /**
  * Category
@@ -10,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Dexnode\BookBundle\Entity\CategoryRepository")
  */
-class Category
+class Category implements Translatable
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\Id     
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -28,31 +30,18 @@ class Category
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=24)
+     * @Gedmo\Translatable
+     * @ORM\Column(name="name", type="string", length=24)
      */
-    private $nameEn;
+    private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=24)
+     * @Gedmo\Translatable
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=24)
      */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="slug_en", type="string", length=24)
-     */
-    private $slugEn;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="slug_fr", type="string", length=24)
-     */
-    private $slugFr;
+    private $slug;
 
     /**
      * @var boolean
@@ -61,6 +50,17 @@ class Category
      */
     private $isActive;
 
+   /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale = 'fr';
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 
     /**
      * Get id
@@ -75,93 +75,47 @@ class Category
     /**
      * Set nameEn
      *
-     * @param string $nameEn
+     * @param string $name
      * @return Category
      */
-    public function setNameEn($nameEn)
+    public function setName($name)
     {
-        $this->nameEn = $nameEn;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nameEn
+     * Get name
      *
      * @return string 
      */
-    public function getNameEn()
+    public function getName()
     {
-        return $this->nameEn;
+        return $this->name;
     }
 
     /**
-     * Set nameFr
+     * Set slug
      *
-     * @param string $nameFr
+     * @param string $slug
      * @return Category
      */
-    public function setNameFr($nameFr)
+    public function setSlug($slug)
     {
-        $this->nameFr = $nameFr;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * Get nameFr
+     * Get slug
      *
      * @return string 
      */
-    public function getNameFr()
+    public function getSlug()
     {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set slugEn
-     *
-     * @param string $slugEn
-     * @return Category
-     */
-    public function setSlugEn($slugEn)
-    {
-        $this->slugEn = $slugEn;
-
-        return $this;
-    }
-
-    /**
-     * Get slugEn
-     *
-     * @return string 
-     */
-    public function getSlugEn()
-    {
-        return $this->slugEn;
-    }
-
-    /**
-     * Set slugFr
-     *
-     * @param string $slugFr
-     * @return Category
-     */
-    public function setSlugFr($slugFr)
-    {
-        $this->slugFr = $slugFr;
-
-        return $this;
-    }
-
-    /**
-     * Get slugFr
-     *
-     * @return string 
-     */
-    public function getSlugFr()
-    {
-        return $this->slugFr;
+        return $this->slug;
     }
 
     /**
@@ -191,6 +145,7 @@ class Category
      */
     public function __construct()
     {
+        $this->setTranslatableLocale('fr');
         $this->books = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

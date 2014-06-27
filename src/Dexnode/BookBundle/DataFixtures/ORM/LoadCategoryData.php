@@ -73,14 +73,36 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
 	 */
 	public function load(ObjectManager $manager)
 	{
+		$repository = $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
+
 		foreach ($this->categories_data as $_ref => $_cols) 
 		{
-			$categorieObj  = new Category();
-			foreach ($_cols as $_colName => $_data) 
+			$categorieObj  = new Category();			
+			foreach ($_cols as $_colName => $_data)
 			{
-				call_user_method('set'.ucfirst($_colName), $categorieObj, $_data);
-				$cat_reference[$_ref] = $categorieObj;
+				if($_colName == 'nameFr' )
+				{
+					$categorieObj->setName($_data);
+				}
+				elseif ($_colName == 'nameEn') 
+				{
+					$repository->translate($categorieObj, 'name', 'en', $_data);
+				}
+				elseif($_colName == 'slugFr' )
+				{
+					$categorieObj->setSlug($_data);
+				}
+				elseif ($_colName == 'slugEn') 
+				{
+					$repository->translate($categorieObj, 'slug', 'en', $_data);
+				}				
+				else
+				{
+					$categorieObj->{'set'.ucfirst($_colName)}( $_data);
+				}
+
 			}
+
 			$manager->persist($categorieObj);
 			$manager->flush();
 			$this->setReference($_ref, $categorieObj);			
