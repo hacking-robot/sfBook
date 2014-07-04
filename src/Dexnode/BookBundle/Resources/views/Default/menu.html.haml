@@ -1,10 +1,10 @@
 %div(class="navbar")
   %div(class="navbar-header")
-    %a(href="/" class="navbar-brand") Livre d'or
+    %a(href="#{path('dexnode_book_homepage')}" class="navbar-brand") Livre d'or
   %div(class="navbar-collapse collapse" id="navbar-main")
     %ul(class="navbar-nav nav")
       %li(class="dropdown")
-        %a(href="/") Tous les livres
+        %a(href="#{path('dexnode_book_homepage')}") Tous les livres
       %li(class="dropdown")
         %a(href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown")
           Par genres
@@ -12,4 +12,4 @@
         %ul(class="dropdown-menu")
           - for category in categories
             %li
-              %a(href="/") #{category.getName()}
+              %a(href="#{path('dexnode_book_categorie', { 'slug': category.getSlug() })}") #{category.getName()}

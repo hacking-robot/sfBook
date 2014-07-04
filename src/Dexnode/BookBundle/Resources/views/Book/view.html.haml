@@ -1,0 +1,40 @@
+- extends "DexnodeBookBundle::layout.html.haml"
+- block content
+  %div(class="row-fluid")
+    %div(class="page-header")
+      %h1 #{book.getTitle()}
+  %div(class="row-fluid")
+    %div(class="col-lg-8")
+      %div(class="panel panel-primary")
+        %div(class="panel-heading")
+          Synopsis
+        %div(class="panel-body")
+          %img(data-src="#{book.getImageFilename()}" src="#{book.getImageFilename()}" style="float:left;margin-right:10px; margin-bottom:10px;max-width:200px;")    
+          #{book.getDescription()}  
+    %div(class="col-lg-4")
+      %ul(class="list-group")
+        %li(class="list-group-item" style="font-size:14px;font-weight:bold;")
+          %span(class="pull-right label label-info" style="font-size:14px") #{book.getScore()}
+          Score
+        %li(class="list-group-item")
+          %span(class="pull-right") #{book.getAuthor()}
+          Author
+        %li(class="list-group-item")
+          %span(class="pull-right") #{book.getPagesCount()}
+          Page #
+        %li(class="list-group-item")
+          %span(class="pull-right") #{book.getLanguage()}
+          Language                    
+        %li(class="list-group-item")
+          %span(class="pull-right") #{book.getReleaseDate()|date('Y-m-d')}
+          Release Date
+        %li(class="list-group-item")
+          %span(class="pull-right") #{book.getISBN13()}
+          ISBN
+        %li(class="list-group-item")
+          - for category in book.getCategories()
+            %span(class="badge") 
+              %a(href="#{path('dexnode_book_categorie', { 'slug': category.getSlug() })}") #{category.getName()}
+          Genre                                 
+
+

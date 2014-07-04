@@ -36,7 +36,6 @@ class Book
 
     /**
      * @var string
-     * @Gedmo\Translatable
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="slug", type="string", length=24)
      */
@@ -194,6 +193,16 @@ class Book
     {
         return $this->title;
     }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }    
 
     /**
      * Set author

@@ -1,17 +1,22 @@
 - extends "DexnodeBookBundle::layout.html.haml"
 - block content
   %div(class="row-fluid")
+    - if category is defined
+      %div(class="row-fluid")
+        %div(class="page-header")
+          %h1 #{category.getName()}  
     - for book in books
       %div(class="row")        
         %div(class="panel panel-default")
           %div(class="panel-heading")
-            #{book.getTitle()} | #{book.getAuthor()} | #{book.getReleaseDate()|date('Y-m-d')} | #{book.getPagesCount()} pages
+            %a(class="btn btn-primary btn-xs" href="#{ path('dexnode_book_show', { 'slug': book.getSlug() }) }")
+              #{book.getTitle()} | #{book.getAuthor()} | #{book.getReleaseDate()|date('Y-m-d')} | #{book.getPagesCount()} pages
           %div(class="panel-body")
             %div(class="col-xs-3 col-md-2")
               %a(href="#" class="thumbnail")
                 %img(data-src="#{book.getImageFilename()}" src="#{book.getImageFilename()}")              
             #{book.getDescription()}
-            %button(type="button" class="btn btn-primary btn-xs")
+            %a(class="btn btn-primary btn-xs" href="#{ path('dexnode_book_show', { 'slug': book.getSlug() }) }")
               Détails...
             %div(style="float:bottom;margin-top:10px;")              
               %span(class="label label-info" style="font-size:12px;margin-right: 5px;")
@@ -26,6 +31,6 @@
                 #{book.getAuthor()}
               %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
                 ISBN #{book.getISBN13()}
-              - for categorie in book.getCategories()
+              - for category in book.getCategories()
                 %span(class="label label-default" style="font-size:12px;margin-right: 5px;")
-                  #{categorie.getName()}
+                  %a(href="#{path('dexnode_book_categorie', { 'slug': category.getSlug() })}") #{category.getName()}

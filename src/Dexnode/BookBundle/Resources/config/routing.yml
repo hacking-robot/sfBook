@@ -5,3 +5,7 @@ dexnode_book_homepage:
 dexnode_book_show:
     path:   /book/{slug}
     defaults:  { _controller: DexnodeBookBundle:Default:show }
+
+dexnode_book_categorie:
+    path:	/genre/{slug}
+    defaults: { _controller: DexnodeBookBundle:Default:category }
